@@ -10,15 +10,13 @@ import java.util.List;
 
 public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
 
-    private String query;
-    private String type;
-    private MainActivity mainActivity;
+    private final String query;
+    private final String type;
 
-    public BookLoader(@NonNull Context context, MainActivity mainActivity, String query, String type) {
+    public BookLoader(@NonNull Context context, String query, String type) {
         super(context);
         this.query = query;
         this.type = type;
-        this.mainActivity = mainActivity;
     }
 
     @Override
@@ -31,6 +29,6 @@ public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
     @Override
     public List<BookInfo> loadInBackground() {
         String json = ServiceUtils.getBookInfoJson(query, type);
-        return mainActivity.fromJsonResponse(json);
+        return BookInfo.fromJsonResponse(json);
     }
 }

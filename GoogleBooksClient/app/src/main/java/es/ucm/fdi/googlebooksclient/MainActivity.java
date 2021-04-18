@@ -13,18 +13,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int BOOK_LOADER_ID = 0;
+    private static final int BOOK_LOADER_ID = 0;
 
     private  BookLoaderCallbacks bookLoaderCallbacks;
 
@@ -45,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         bookLoaderCallbacks = new BookLoaderCallbacks(getApplicationContext(), this);
 
-        brla = new BooksResultListAdapter(new ArrayList<>());
+        brla = new BooksResultListAdapter(this, new ArrayList<>());
         execListener();
 
         LoaderManager loaderManager = LoaderManager.getInstance(this);
@@ -87,7 +81,10 @@ public class MainActivity extends AppCompatActivity {
             default:
                 throw new IllegalStateException("Unexpected value in radioButton");
         }
-        
+        result.setText(R.string.results_loading_tag);
+        result.setVisibility(View.VISIBLE);
+        brla.setBooksData(new ArrayList<>());
+        recyclerListBook.getAdapter().notifyDataSetChanged();
         
         Bundle queryBundle = new Bundle();
         queryBundle.putString(BookLoaderCallbacks.EXTRA_QUERY, queryString);
@@ -97,67 +94,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void updateBooksResultList(List<BookInfo> bookInfos){
-        if(bookInfos.isEmpty()){
-            result.setText("No hay resultados");
+    public void updateBooksResultList(List<BookInfo> booksInfo){
+
+        if(booksInfo.isEmpty()){
+            result.setText(R.string.results_not_found_tag);
         }
         else{
-            result.setText("Resultados");
+            result.setText(R.string.results_found_tag);
         }
 
-        brla.setBooksData(bookInfos);
+        brla.setBooksData(booksInfo);
         recyclerListBook.getAdapter().notifyDataSetChanged();
     }
 
-    public List<BookInfo> fromJsonResponse(String s){
-        List<BookInfo> listBook = new ArrayList<BookInfo>();
-        try {
-            JSONObject jsonObject = new JSONObject(s);
-            JSONArray itemsArray = jsonObject.getJSONArray("items");
-
-            int i = 0;
-            int j = 0;
-            String title = "";
-            String authors = "";
-            String link = "";
-
-            while (i < itemsArray.length()) {
-                // Get the current item information.
-                JSONObject book = itemsArray.getJSONObject(i);
-                JSONObject volumeInfo = book.getJSONObject("volumeInfo");
-
-                // Try to get the author, title and link from the current item,
-                // catch if either field is empty and move on.
-                try {
-                    title = volumeInfo.getString("title");
-
-                    JSONArray authorsArray = volumeInfo.getJSONArray("authors");
-                    while (j < authorsArray.length()){
-                        authors += (authorsArray.getString(j) + " ");
-                        j++;
-                    }
-                    j = 0;
-
-                    link = volumeInfo.getString("infoLink");
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                listBook.add(new BookInfo(title, authors, link.equals("")? null : new URL(link)));
-
-                // Move to the next item.
-                i++;
-                title = "";
-                authors = "";
-                link = "";
-            }
-
-        } catch (JSONException | MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        return  listBook;
-    }
 
 }

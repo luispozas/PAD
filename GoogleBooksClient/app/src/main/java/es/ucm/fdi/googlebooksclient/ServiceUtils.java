@@ -16,9 +16,8 @@ public class ServiceUtils {
     private static final String QUERY_PARAM = "q";
     private static final String PRINT_TYPE = "printType";
     private static final String MAX_RESULTS = "maxResults";
-    private static final String MAX_VALUE = "15";
+    private static final String MAX_VALUE = "40";
 
-    public ServiceUtils(){}
 
     public static String getBookInfoJson(String queryString, String printType) {
         HttpURLConnection urlConnection = null;
@@ -59,12 +58,12 @@ public class ServiceUtils {
             }
 
             bookJSONString = builder.toString();
-            Log.d(LOG_TAG, bookJSONString);
+            //Log.d(LOG_TAG, bookJSONString);
 
 
 
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.d(LOG_TAG, e.toString());
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();

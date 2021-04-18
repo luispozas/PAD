@@ -29,7 +29,7 @@ public class BookLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<B
     public Loader<List<BookInfo>> onCreateLoader(int id, @Nullable Bundle args) {
         String query = args.getString(EXTRA_QUERY);
         String type = args.getString(EXTRA_PRINT_TYPE);
-        return new BookLoader(context, mainActivity, query, type);
+        return new BookLoader(context, query, type);
     }
 
     @Override

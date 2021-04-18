@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">GoogleBooksClient</string>
+    <string name="results_found_tag">Results</string>
+    <string name="results_not_found_tag">No Results Found</string>
+    <string name="results_loading_tag">Loading…</string>
+    <string name="main_title">Book search</string>
+    <string name="authors_hint">Book authors</string>
+    <string name="title_hint">Book title</string>
+    <string name="button_search_tag">SEARCH BOOKS</string>
+    <string name="radio_all_tag">All</string>
+    <string name="radio_books_tag">Books</string>
+    <string name="radio_magazines_tag">Magazines</string>
 </resources>

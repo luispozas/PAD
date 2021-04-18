@@ -13,7 +13,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginLeft="28dp"
         android:layout_marginTop="40dp"
-        android:text="Book search"
+        android:text="@string/main_title"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,8 +25,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
-        android:text="Results"
+        android:text="@string/results_loading_tag"
         android:textSize="30sp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
@@ -36,7 +37,7 @@
         android:layout_height="35dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Book authors"
+        android:hint="@string/authors_hint"
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +49,7 @@
         android:layout_width="350dp"
         android:layout_height="35dp"
         android:layout_marginTop="8dp"
-        android:hint="Title"
+        android:hint="@string/title_hint"
         android:lines="1"
         android:maxLines="10"
         android:textSize="14sp"
@@ -62,7 +63,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:background="#BFBFBF"
-        android:text="Search books"
+        android:text="@string/button_search_tag"
         android:textSize="18sp"
         app:backgroundTint="#A5A5A5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,19 +85,19 @@
             android:id="@+id/radioButtonAll"
             android:layout_width="79dp"
             android:layout_height="wrap_content"
-            android:text="All" />
+            android:text="@string/radio_all_tag" />
 
         <RadioButton
             android:id="@+id/radioButtonBooks"
             android:layout_width="88dp"
             android:layout_height="wrap_content"
-            android:text="Books" />
+            android:text="@string/radio_books_tag" />
 
         <RadioButton
             android:id="@+id/radioButtonMagazines"
             android:layout_width="113dp"
             android:layout_height="wrap_content"
-            android:text="Magazines" />
+            android:text="@string/radio_magazines_tag" />
     </RadioGroup>
 
     <androidx.recyclerview.widget.RecyclerView
